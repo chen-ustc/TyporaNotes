@@ -1,0 +1,44 @@
+- 环境：ubuntu20.04
+
+- vim -v:8.1.3741
+
+- 问题描述：copy过去的代码注释的中文部分是乱码
+
+- 原因：该文本可能是在windows环境中编写的，用国标码来表示汉字，而ubuntu中默认是utf-8，按照utf-8的编码方式显示，因而产生了乱码
+
+- 解决方案：
+
+  - 编辑`/usr/share/vim/vimrc`文件
+
+  - 在文件的末尾添加如下的代码：
+
+    ```
+    set fileencodings=gb2312,utf-8
+    set fileencoding=gb2312
+    set termencoding=utf-8
+    ```
+
+    需要注意第一行是fileencodings而不是fileencoding
+
+- 一些相关的知识点
+
+  - encoding：encoding是vim的内部使用编码，encoding的设置会影响vim内部的buffer、消息文字等。
+  - fileencodings：vim在打开文件时会根据fileencodings选项来识别文件的编码，fileencodings可以同时设置多个编码，用逗号隔开，vim会根据设置的顺序来猜测所打开文件的编码。
+  - fileencoding：保存新建的文件时用fileencoding设置的编码来保存，但如果是打开已有文件，vim则会根据打开文件时所识别的编码来保存。除非在保存时重新设置fileencoding。
+  - termencoding：在终端环境下使用vim时，通过termencoding来告诉vim终端所使用的编码。
+
+  这些都可以通过命令行模式来进行设置。
+
+  **一些编码方式**
+
+  - utf-8：支持多个国家语言
+  - unicode:忘记了
+  - gb2313:国标码，只支持简体汉字，别名为euc-cn。
+  - gbk：gb2312的超集，支持简体和繁体。别名为cp936.
+
+后面会专门再仔细了解一下字符的编码方式并做记录。
+
+参考博文：
+
+https://blog.csdn.net/m0_37806112/article/details/81253292
+
