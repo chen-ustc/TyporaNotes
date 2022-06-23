@@ -651,4 +651,12 @@ call sub(a,b)
 
 - 自动数组(auto arrays)
 
+  ```fortran
+  subroutine sub(a,m,n)
+  	integer m,n
+  	real a(m,n)
+  	a = 2
+  end subroutine sub
+  ```
+  
   
